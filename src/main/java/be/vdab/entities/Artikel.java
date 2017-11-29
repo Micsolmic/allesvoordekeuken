@@ -25,7 +25,15 @@ public class Artikel implements Serializable{
 	private BigDecimal verkoopprijs;
 	
 	
+	protected Artikel() {/*def constructor needed for JPA*/}
 	
+	public Artikel(String naam, BigDecimal aankoopprijs, BigDecimal verkoopprijs) {
+		
+		setNaam(naam);
+		setAankoopprijs(aankoopprijs);
+		setVerkoopprijs(verkoopprijs);
+		
+	}
 	
 	public int getId() {
 		return id;
@@ -37,19 +45,43 @@ public class Artikel implements Serializable{
 		return naam;
 	}
 	public void setNaam(String naam) {
-		this.naam = naam;
+		if(naam != null && ! naam.isEmpty()) {
+			
+			this.naam = naam;
+			
+		}else {
+			
+			throw new IllegalArgumentException("naam moet ingevuld");
+			
+		}
 	}
 	public BigDecimal getAankoopprijs() {
 		return aankoopprijs;
 	}
 	public void setAankoopprijs(BigDecimal aankoopprijs) {
-		this.aankoopprijs = aankoopprijs;
+if(aankoopprijs.compareTo(BigDecimal.ZERO) > 0) {
+			
+			this.aankoopprijs = aankoopprijs;
+			
+		}else {
+			
+			throw new IllegalArgumentException("aankoopprijs moet groter dan 0");
+			
+		}
 	}
 	public BigDecimal getVerkoopprijs() {
 		return verkoopprijs;
 	}
 	public void setVerkoopprijs(BigDecimal verkoopprijs) {
-		this.verkoopprijs = verkoopprijs;
+if(aankoopprijs.compareTo(BigDecimal.ZERO) > 0) {
+			
+			this.verkoopprijs = verkoopprijs;
+			
+		}else {
+			
+			throw new IllegalArgumentException("verkoopprijs moet groter dan 0");
+			
+		}
 	}
 	
 	

@@ -12,17 +12,16 @@ public class ArtikelRepository {
 	
 	
 	
-	public Optional<Artikel> read(int id){
+	public Optional<Artikel> read(int id, EntityManager em){
 		
-		EntityManager em = JPAFilter.getEntityManager();
-		
-		try {
-			
 			Artikel art = em.find(Artikel.class, id);
-			return Optional.ofNullable(art);
-			
-		}finally {em.close();}
+			return Optional.ofNullable(art);		
+	}
+	
+	public void voegArtikelToe(Artikel artikel, EntityManager em) {
 		
+		
+		em.persist(artikel);
 		
 		
 	}

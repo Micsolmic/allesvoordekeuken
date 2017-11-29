@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import be.vdab.entities.Artikel;
-import be.vdab.repositories.ArtikelRepository;
+import be.vdab.services.ArtikelService;
 
 /**
  * Servlet implementation class ZoekenOpNummer
@@ -20,7 +20,7 @@ import be.vdab.repositories.ArtikelRepository;
 public class ZoekenOpNummer extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private static final String VIEW ="/WEB-INF/JSP/artikels/zoekenopnummer.jsp";   
-    private static final ArtikelRepository artRepo = new ArtikelRepository();
+    private static final ArtikelService artService = new ArtikelService();
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -31,7 +31,7 @@ public class ZoekenOpNummer extends HttpServlet {
 		if(request.getQueryString()!=null) {
 			
 			try {				
-				Optional<Artikel> optArt = artRepo.read(Integer.valueOf(request.getParameter("id")));
+				Optional<Artikel> optArt = artService.leesArtikel(Integer.valueOf(request.getParameter("id")));
 				optArt.ifPresent(art -> request.setAttribute("artikel", art));
 				
 			}catch(NumberFormatException ex) {
