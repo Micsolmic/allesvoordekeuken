@@ -19,9 +19,11 @@ public class JPAFilter implements Filter {
 
 	
 	
+	
 	private static final EntityManagerFactory entityManagerFactory
 	= Persistence.createEntityManagerFactory("allesvoordekeuken");
 	
+	ThreadLocal<EntityManager> entityManagers = new ThreadLocal<>();
 	
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
@@ -32,7 +34,23 @@ public class JPAFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response,
 	FilterChain chain) throws ServletException, IOException {
 	request.setCharacterEncoding("UTF-8"); 
-	chain.doFilter(request, response);
+	
+	try {
+		
+		entityManagers.set(entityManagerFactory.createEntityManager());
+		
+		chain.doFilter(request, response);
+		
+		
+	}finally {
+		
+	
+		EntityManager entityManager = entityManagers.get(); 
+		entityManager.close(); 
+		entityManagers.remove(); 
+		
+	}
+	
 	}
 	
 	@Override

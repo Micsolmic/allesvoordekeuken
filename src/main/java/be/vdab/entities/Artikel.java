@@ -19,7 +19,7 @@ public class Artikel implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private long id;
 	private String naam;
 	private BigDecimal aankoopprijs;
 	private BigDecimal verkoopprijs;
@@ -35,7 +35,7 @@ public class Artikel implements Serializable{
 		
 	}
 	
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 	public void setId(int id) {
