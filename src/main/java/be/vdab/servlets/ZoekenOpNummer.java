@@ -31,7 +31,7 @@ public class ZoekenOpNummer extends HttpServlet {
 		if(request.getQueryString()!=null) {
 			
 			try {				
-				Optional<Artikel> optArt = artService.leesArtikel(Integer.valueOf(request.getParameter("id")));
+				Optional<Artikel> optArt = artService.read(Integer.valueOf(request.getParameter("id")));
 				optArt.ifPresent(art -> request.setAttribute("artikel", art));
 				
 			}catch(NumberFormatException ex) {

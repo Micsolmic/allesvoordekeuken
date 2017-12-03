@@ -41,7 +41,7 @@ public class ArtikelToevoegen extends HttpServlet {
 		BigDecimal verkoopprijs = new BigDecimal(request.getParameter("verkoopprijs"));
 		try {
 		Artikel art = new Artikel(naam, aankoopprijs, verkoopprijs);		
-		artService.voegArtikelToe(art);
+		artService.create(art);
 		
 		response.sendRedirect(String.format(REDIRECT_URL, request.getContextPath(), art.getId()));
 		
