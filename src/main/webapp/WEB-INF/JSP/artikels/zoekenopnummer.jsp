@@ -28,3 +28,5 @@ winst: <fmt:formatNumber value='${(artikel.verkoopprijs - artikel.aankoopprijs)/
 </c:if>
 </body>
 </html>
+
+

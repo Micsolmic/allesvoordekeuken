@@ -26,3 +26,12 @@ body{
 	background-color: #d5e7c2;
 	
 }
+
+
+
+table#artikelsOpDeelnaam td, table#artikelsOpDeelnaam th{
+	
+	text-align: right;
+	min-width: 10em;
+	
+}

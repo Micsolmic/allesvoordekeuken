@@ -1,5 +1,6 @@
 package be.vdab.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import be.vdab.entities.Artikel;
@@ -39,5 +40,9 @@ public class ArtikelService extends AbstractService
 			}
 			}
 	
-		
+		public List<Artikel> zoekOpDeelnaam(String deelnaam){
+			
+			return artikelRepository.zoekOpDeelnaam(deelnaam);
+			
+		}
 }
