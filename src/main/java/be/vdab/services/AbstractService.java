@@ -8,7 +8,7 @@ import be.vdab.filters.JPAFilter;
 
 // enkele imports ...
 abstract class AbstractService {
-private EntityManager getEntityManager() {
+protected EntityManager getEntityManager() {
 return JPAFilter.getEntityManager();
 }
 void beginTransaction() {

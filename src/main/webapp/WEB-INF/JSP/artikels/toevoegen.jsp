@@ -12,12 +12,29 @@
 <label>Aankoopprijs:<br><input name='aankoopprijs' value='${param.aankoopprijs}' type="number" required min=0 step=0.01></label><br>
 <label>Verkoopprijs:<br><input name='verkoopprijs' value='${param.verkoopprijs}' type="number" required min=0 step=0.01></label><br>
 
-<button type="submit" id="toevoegknop">toevoegen</button>
+<button type="submit" id="toevoegknop">toevoegen</button><br><br>
+
+<input type="radio" id="food" name="type" value="food"><label for="type">Food</label><br>
+Houdbaarheid:<br>
+<input name="houdbaarheid" id="houdbaarheid"  type="number" step="1"><br>
+<input type="radio" id="nonfood" name="type" value="nonfood"><label for="type">Non-food</label><br>
+Garantie:<br>
+<input id="garantie" name="garantie" type="number" step="1">
 </form>
 <script>
 document.getElementById('toevoegform').onsubmit = function() {
 document.getElementById('toevoegknop').disabled = true;
 };
+
+document.getElementById('food').onclick = enableDisableInputs;
+document.getElementById('nonfood').onclick = enableDisableInputs; 
+enableDisableInputs(); 
+
+function enableDisableInputs() {   
+	document.getElementById('houdbaarheid').disabled = ! document.getElementById('food').checked;   
+	document.getElementById('garantie').disabled = ! document.getElementById('nonfood').checked;  
+	} 
+
 </script>
 </body>
 </html>

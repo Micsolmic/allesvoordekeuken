@@ -29,6 +29,16 @@ public List<Artikel> zoekOpDeelnaam(String deelnaam){
 	
 }
 
+public int prijsverhoging(BigDecimal percentage) {
+	return
+	getEntityManager()
+	.createNamedQuery("Artikel.prijsverhoging")
+	.setParameter("factor", percentage.multiply(BigDecimal.valueOf(0.01)))
+	.executeUpdate();
+	
+	
+}
+
 }
 
 

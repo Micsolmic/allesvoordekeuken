@@ -39,6 +39,17 @@ public class ArtikelToevoegen extends HttpServlet {
 		String naam = request.getParameter("naam");
 		BigDecimal aankoopprijs = new BigDecimal(request.getParameter("aankoopprijs"));
 		BigDecimal verkoopprijs = new BigDecimal(request.getParameter("verkoopprijs"));
+		
+		/* under construction
+		
+		String soort = request.getParameter("type");
+		int houdbaarheid = Integer.valueOf(request.getParameter("verkoopprijs"));
+		int garantie = Integer.valueOf(request.getParameter("verkoopprijs"));
+		
+		
+		*/
+		
+		
 		try {
 		Artikel art = new Artikel(naam, aankoopprijs, verkoopprijs);		
 		artService.create(art);
