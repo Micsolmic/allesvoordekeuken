@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import be.vdab.entities.Artikel;
+import be.vdab.entities.FoodArtikel;
+import be.vdab.entities.NonFoodArtikel;
 import be.vdab.services.ArtikelService;
 
 /**
@@ -40,33 +42,61 @@ public class ArtikelToevoegen extends HttpServlet {
 		BigDecimal aankoopprijs = new BigDecimal(request.getParameter("aankoopprijs"));
 		BigDecimal verkoopprijs = new BigDecimal(request.getParameter("verkoopprijs"));
 		
-		/* under construction
 		
 		String soort = request.getParameter("type");
-		int houdbaarheid = Integer.valueOf(request.getParameter("verkoopprijs"));
-		int garantie = Integer.valueOf(request.getParameter("verkoopprijs"));
+		int houdbaarheid;
+		int garantie;
+		Artikel art;
 		
-		
-		*/
-		
-		
-		try {
-		Artikel art = new Artikel(naam, aankoopprijs, verkoopprijs);		
-		artService.create(art);
-		
-		response.sendRedirect(String.format(REDIRECT_URL, request.getContextPath(), art.getId()));
-		
-		}catch(IllegalArgumentException ex){
+		if(request.getParameter("houdbaarheid")!=null){			
+			houdbaarheid = Integer.valueOf(request.getParameter("houdbaarheid"));
+			art = new FoodArtikel(naam, aankoopprijs, verkoopprijs, houdbaarheid);		
 			
-			fouten.add(ex.toString());
-			request.setAttribute("fouten", fouten);
-			request.getRequestDispatcher(VIEW).forward(request, response);
+
+			try {
+				
+				artService.create(art);
+				
+				response.sendRedirect(String.format(REDIRECT_URL, request.getContextPath(), art.getId()));
+				
+				}catch(IllegalArgumentException ex){
+					
+					fouten.add(ex.toString());
+					request.setAttribute("fouten", fouten);
+					request.getRequestDispatcher(VIEW).forward(request, response);
+				}
+			
 		}
 		
+		if(request.getParameter("garantie")!=null){			
+			garantie = Integer.valueOf(request.getParameter("garantie"));
+			art = new NonFoodArtikel(naam, aankoopprijs, verkoopprijs, garantie);
+			
+
+			try {
+				
+				artService.create(art);
+				
+				response.sendRedirect(String.format(REDIRECT_URL, request.getContextPath(), art.getId()));
+				
+				}catch(IllegalArgumentException ex){
+					
+					fouten.add(ex.toString());
+					request.setAttribute("fouten", fouten);
+					request.getRequestDispatcher(VIEW).forward(request, response);
+				}
+		}
+				
+	
+	
+
+	
 		
 		
 		
 		
-	}
+}
+		
+	
 
 }

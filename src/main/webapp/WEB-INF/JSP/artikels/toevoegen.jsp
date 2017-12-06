@@ -21,9 +21,24 @@ Houdbaarheid:<br>
 Garantie:<br>
 <input id="garantie" name="garantie" type="number" step="1">
 </form>
+<span id="foutje"></span>
 <script>
-document.getElementById('toevoegform').onsubmit = function() {
-document.getElementById('toevoegknop').disabled = true;
+document.getElementById('toevoegknop').onclick = function(event) {
+	
+	event.preventDefault();
+	if(document.getElementById('houdbaarheid').value.length == 0 && document.getElementById('garantie').value.length == 0){
+		
+		document.getElementById("foutje").textContent = "vul houdbaarheid/garantie in";
+		
+		
+	}else{
+		console.log("hier");
+		document.getElementById('toevoegform').submit();
+		
+	}
+	
+	
+
 };
 
 document.getElementById('food').onclick = enableDisableInputs;
