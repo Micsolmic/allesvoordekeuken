@@ -2,15 +2,23 @@ package be.vdab.entities;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
+import javax.persistence.CollectionTable;
 import javax.persistence.DiscriminatorColumn;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
+
+import be.vdab.valueobjects.Korting;
 
 
 @Entity
@@ -29,6 +37,12 @@ public class Artikel implements Serializable{
 	private BigDecimal aankoopprijs;
 	private BigDecimal verkoopprijs;
 	
+	@ElementCollection
+	@CollectionTable (name="kortingen", joinColumns = @JoinColumn(name="artikelid"))
+	@OrderBy("vanafAantal")
+	Set<Korting> kortingen;
+	
+	
 	
 	protected Artikel() {/*def constructor needed for JPA*/}
 	
@@ -37,7 +51,7 @@ public class Artikel implements Serializable{
 		setNaam(naam);
 		setAankoopprijs(aankoopprijs);
 		setVerkoopprijs(verkoopprijs);
-		
+		kortingen = new LinkedHashSet<>();
 	}
 	
 	public long getId() {
@@ -60,6 +74,8 @@ public class Artikel implements Serializable{
 			
 		}
 	}
+	
+	
 	public BigDecimal getAankoopprijs() {
 		return aankoopprijs;
 	}
@@ -89,5 +105,15 @@ if(aankoopprijs.compareTo(BigDecimal.ZERO) > 0) {
 		}
 	}
 	
+	
+	public Set<Korting> getKortingen(){
+		return kortingen;		
+	}
+	
+	public int compareTo(Artikel art) {
+		
+		return this.getNaam().compareTo(art.getNaam());
+		
+	}
 	
 }

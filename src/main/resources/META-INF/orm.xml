@@ -16,4 +16,11 @@ where d.naam like :zoals order by d.naam
 update Artikel d set d.verkoopprijs = d.verkoopprijs + d.verkoopprijs * :factor
 </query>
 </named-query>
+
+<named-query name='Artikel.zoekalle'>
+<query>
+select a from Artikel a 
+</query>
+</named-query>
+
 </entity-mappings>

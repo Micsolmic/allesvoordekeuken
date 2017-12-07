@@ -1,5 +1,6 @@
 package be.vdab.repositories;
 import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,6 +38,15 @@ public int prijsverhoging(BigDecimal percentage) {
 	.executeUpdate();
 	
 	
+}
+
+public List<Artikel> zoekAlle(){
+	
+	List<Artikel> alleArtikels =  getEntityManager()
+			.createNamedQuery("Artikel.zoekalle", Artikel.class)
+			.getResultList();
+	Collections.sort(alleArtikels, (artikel1,artikel2) -> artikel1.compareTo(artikel2));
+	return alleArtikels;
 }
 
 }

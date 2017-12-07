@@ -64,7 +64,20 @@ public class ArtikelService extends AbstractService
 				rollback();
 				throw ex;
 			}
-			
-			
 		}
+		
+		
+		public List<Artikel> zoekAlle(){	
+			
+				return artikelRepository.zoekAlle();				
+				
+			}
+			
+			
+			
+			
+	
+			
+			
+		
 }

@@ -35,3 +35,8 @@ table#artikelsOpDeelnaam td, table#artikelsOpDeelnaam th{
 	min-width: 10em;
 	
 }
+
+.bold{
+	
+	font-size: 2em;
+}
